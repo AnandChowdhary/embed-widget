@@ -35,3 +35,15 @@ strong {
   font-size: 300%;
   font-weight: 300;
 }
+
+label {
+  display: block;
+  line-height: 2;
+}
+
+.embed-widget-button.gitter { background-color: #34495e }
+.embed-widget-button.discord { background-color: #6F85D3 }
+.embed-widget-button.helpdesk { background-color: #1abc9c }
+.embed-widget-button.tlkio { background-color: #5D9DFC }
+.embed-widget-button.typeform { background-color: #87C7C5; color: #31373D; }
+.embed-widget-button.website { background-color: #e74c3c }

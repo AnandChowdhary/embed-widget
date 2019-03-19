@@ -7,17 +7,17 @@ export default class EmbedWidget implements Embed {
   container: HTMLDivElement;
   initialText: string;
   state: string;
-  constructor(url: string, text: string) {
+  constructor(url: string, text: string, extraClass?: string) {
     this.url = url;
     this.state = "closed";
     this.initialText = text;
     this.button = document.createElement("button");
-    this.updateButton();
-    this.button.addEventListener("click", () => this.toggle());
-    this.button.classList.add("embed-widget-button");
-    if (document.body) document.body.appendChild(this.button);
     this.container = document.createElement("div");
-    this.container.classList.add("embed-widget-container");
+    if (extraClass) {
+      this.button.classList.add(extraClass);
+      this.container.classList.add(extraClass);
+    }
+    this.start();
   }
   toggle() {
     if (this.state === "open") {
@@ -35,10 +35,15 @@ export default class EmbedWidget implements Embed {
     this.state = "closed";
     this.updateButton();
   }
+  focusFrame() {
+    const iframe = <HTMLElement>document.querySelector(".embed-widget-iframe");
+    if (iframe) iframe.focus();
+  }
   appendFrame() {
     if (document.querySelector(".embed-widget-iframe")) {
       this.state = "open";
       this.updateButton();
+      this.focusFrame();
       return;
     }
     this.container.innerHTML = `<iframe class="embed-widget-iframe" src="${
@@ -50,6 +55,7 @@ export default class EmbedWidget implements Embed {
       iframe.addEventListener("load", () => {
         this.state = "open";
         this.updateButton();
+        this.focusFrame();
       });
     }
   }
@@ -76,6 +82,18 @@ export default class EmbedWidget implements Embed {
       this.button.innerHTML = `<span>Close</span><svg viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" fill-rule="nonzero" d="M73.9 28.1a3.9 3.9 0 0 0-5.5 0L51 45.6 33.6 28a3.8 3.8 0 0 0-5.5 5.5L45.6 51 28 68.4a3.8 3.8 0 1 0 5.5 5.5L51 56.3 68.4 74a3.8 3.8 0 0 0 5.5 0c1.5-1.6 1.5-4 0-5.5L56.4 51l17.4-17.4c1.5-1.5 1.5-4 0-5.5"></path></svg>`;
     }
     this.updateClasses();
+  }
+  destroy() {
+    if (this.button.parentNode) this.button.parentNode.removeChild(this.button);
+    if (this.container.parentNode)
+      this.container.parentNode.removeChild(this.container);
+  }
+  start() {
+    this.updateButton();
+    this.button.addEventListener("click", () => this.toggle());
+    this.button.classList.add("embed-widget-button");
+    if (document.body) document.body.appendChild(this.button);
+    this.container.classList.add("embed-widget-container");
   }
 }
 

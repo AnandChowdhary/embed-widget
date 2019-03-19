@@ -6,11 +6,14 @@ export default class EmbedWidget implements Embed {
     container: HTMLDivElement;
     initialText: string;
     state: string;
-    constructor(url: string, text: string);
+    constructor(url: string, text: string, extraClass?: string);
     toggle(): void;
     open(): void;
     close(): void;
+    focusFrame(): void;
     appendFrame(): void;
     updateClasses(): void;
     updateButton(): void;
+    destroy(): void;
+    start(): void;
 }
