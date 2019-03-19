@@ -1,5 +1,5 @@
-interface Typerface {
-  value?: string;
+interface Embed {
+  url: string;
 }
 
-export { Typerface };
+export { Embed };

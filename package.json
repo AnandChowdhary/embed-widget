@@ -1,5 +1,5 @@
 {
-  "name": "typestart",
+  "name": "embed-widget",
   "version": "2.0.0",
   "description": "Typescript DOM library starter template",
   "main": "docs/index.js",
@@ -8,7 +8,7 @@
   "files": [
     "docs"
   ],
-  "repository": "git@github.com:AnandChowdhary/typestart.git",
+  "repository": "git@github.com:AnandChowdhary/embed-widget.git",
   "author": "Anand Chowdhary <anandchowdhary@gmail.com>",
   "license": "Unlicense",
   "scripts": {
